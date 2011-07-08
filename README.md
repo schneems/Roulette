@@ -1,6 +1,6 @@
 Roulette
 ======
-Super easy pre-sharding for your ruby NOSQL store. Presharding is used to naively scale your data-stores horizontally. 
+`Super easy pre-sharding for your ruby NOSQL store. Presharding is used to naively scale your data-stores horizontally. `
 
 [What is presharding](http://antirez.com/post/redis-presharding.html)
 
@@ -25,6 +25,8 @@ Bang
     => "bar"
     
 ### Works with ANY store that takes a key as it's first argument ###
+
+Simply call roulette like you would call any of your client libraries. Roulette will automatically split the data between different machines.
 
 Limitations
 -----------

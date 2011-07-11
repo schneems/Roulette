@@ -1,4 +1,3 @@
-
 # Roulette.config([Redis.new(..), Redis.new(...)])
 #
 # r = Roulette.new([Redis.new(..), Redis.new(...)])
@@ -26,14 +25,18 @@ class Roulette
   class Transaction
     attr_accessor :key, :args, :stores
 
+
     def initialize(stores, *args)
       self.stores = stores
       self.args = *args
       extract_args
     end
 
-    def extract_args
-      self.key = args.first.to_s
+    def extract_key
+      # there is a 'bug' with something in the rails library that when loaded will
+      # produce Roulette::Transaction.new([], "key") # => "k" instead of "key"
+      # this is a fix for that, but i don't know what in rails env causes this discrepency
+      self.key = args.is_a?(Array) ? args.first.to_s : args.to_s
     end
 
     def fire(method)

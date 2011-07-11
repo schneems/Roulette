@@ -20,10 +20,17 @@ describe Roulette::Transaction do
       end
     end
     
-    describe '#extract_args' do
+
+    describe '#extract_key' do
+      it "pulls out the key even if there is only one arg" do
+        key = "foo"
+        transaction = Roulette::Transaction.new([], key)
+        transaction.extract_key.should eq(key)
+      end
+
       it "pulls out the key" do
-        transaction = Roulette::Transaction.new([@kv_store], *@args)
-        transaction.extract_args.should eq(@key)
+        transaction = Roulette::Transaction.new([], *@args)
+        transaction.extract_key.should eq(@key)
       end
     end
     

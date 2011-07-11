@@ -16,7 +16,7 @@ class Roulette
   attr_accessor :stores
 
   def initialize(*stores)
-    self.stores = stores
+    self.stores = stores.flatten
   end
 
   def method_missing(method_name, *args, &blk)

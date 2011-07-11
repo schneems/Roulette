@@ -29,7 +29,7 @@ class Roulette
     def initialize(stores, *args)
       self.stores = stores
       self.args = *args
-      extract_args
+      extract_key
     end
 
     def extract_key

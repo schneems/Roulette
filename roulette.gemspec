@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{roulette}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Schneems"]
-  s.date = %q{2011-07-11}
+  s.date = %q{2011-07-14}
   s.description = %q{
    Super easy pre-sharding for your ruby NOSQL store. Presharding is used to naively scale your data-stores horizontally. 
   }
@@ -26,12 +26,14 @@ Gem::Specification.new do |s|
     "VERSION",
     "autotest/discover.rb",
     "lib/roulette.rb",
+    "lib/roulette/transaction.rb",
     "license.txt",
     "pkg/roulette-.gem",
     "pkg/roulette-0.0.1.gem",
+    "pkg/roulette-0.0.2.gem",
     "roulette.gemspec",
-    "spec/roulette/roulette_spec.rb",
     "spec/roulette/transaction_spec.rb",
+    "spec/roulette_spec.rb",
     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/Schnems/roulette}
@@ -40,8 +42,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.6.2}
   s.summary = %q{Pre-Sharding so simple you'll shoot yourself :p}
   s.test_files = [
-    "spec/roulette/roulette_spec.rb",
     "spec/roulette/transaction_spec.rb",
+    "spec/roulette_spec.rb",
     "spec/spec_helper.rb"
   ]
 

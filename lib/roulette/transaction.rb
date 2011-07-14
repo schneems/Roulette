@@ -8,6 +8,7 @@ class Roulette::Transaction
   end
 
   def fire(method_name = nil )
-    store.send (method_name||method).to_sym, *args
+    method_to_fire = (method_name||method).to_sym
+    store.send method_to_fire, *args
   end
 end

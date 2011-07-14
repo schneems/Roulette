@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{roulette}
-  s.version = "0.0.3"
+  s.version = "0.0.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Schneems"]
@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
     "pkg/roulette-.gem",
     "pkg/roulette-0.0.1.gem",
     "pkg/roulette-0.0.2.gem",
+    "pkg/roulette-0.0.3.gem",
     "roulette.gemspec",
     "spec/roulette/transaction_spec.rb",
     "spec/roulette_spec.rb",

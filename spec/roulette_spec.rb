@@ -43,4 +43,42 @@ describe Roulette do
         @roulette.stores.should eq(store_array)
       end
     end
+    
+
+     describe '#extract_key' do
+       before do
+         @kv_store = FakeKeyValueStore.new
+         @roulette = Roulette.new(@kv_store)
+       end
+
+       it "pulls out the key even if there is only one arg" do
+         key = "foo"
+         @roulette.extract_key(key).should eq(key)
+       end
+     
+       it "pulls out the key" do
+         key = "foo"
+         @roulette.extract_key([key, "some", "other", "stuff"]).should eq(key)
+       end
+     end
+     
+     describe '#select_store' do
+       before do
+         @kv_store = FakeKeyValueStore.new
+         @roulette = Roulette.new(@kv_store)
+       end
+       
+       it "picks a store" do
+         @roulette.select_store("key").should eq(@kv_store)
+       end
+     
+       it "selects different stores for different keys" do
+         @kv_store_deux = FakeKeyValueStore.new
+         multiple_store_roulette = Roulette.new([@kv_store, @kv_store_deux])
+         store = multiple_store_roulette.select_store("key")
+         store_deux = multiple_store_roulette.select_store("different_key")
+         store.should_not eq(store_deux)
+       end
+     end
+    
 end

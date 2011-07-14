@@ -19,36 +19,23 @@ class Roulette
   end
 
   def method_missing(method_name, *args, &blk)
-    Transaction.new(@stores, *args).fire(method_name)
+    Transaction.new(:args => args, :store => select_store(args), :method => method_name).fire
   end
 
-  class Transaction
-    attr_accessor :key, :args, :stores
-
-
-    def initialize(stores, *args)
-      self.stores = stores
-      self.args = *args
-      extract_key
-    end
-
-    def extract_key
-      # there is a 'bug' with something in the rails library that when loaded will
-      # produce Roulette::Transaction.new([], "key") # => "k" instead of "key"
-      # this is a fix for that, but i don't know what in rails env causes this discrepency
-      self.key = args.is_a?(Array) ? args.first.to_s : args.to_s
-    end
-
-    def fire(method)
-      select_store.send method.to_sym, *args
-    end
-
-    private
-    def select_store
-      val = Digest::SHA1.hexdigest(self.key).unpack('Q').join.to_i
-      store_index = val % stores.count
-      @stores[store_index]
-    end
+  def extract_key(*args)
+    args.flatten.first.to_s
   end
 
+  def select_store(*args)
+    key = extract_key(*args)
+    store_for_key(key)
+  end
+
+  def store_for_key(key)
+    val = Digest::SHA1.hexdigest(key).unpack('Q').join.to_i
+    store_index = val % stores.count
+    self.stores[store_index]
+  end
 end
+
+require 'roulette/transaction'

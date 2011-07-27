@@ -36,6 +36,11 @@ class Roulette
     store_index = val % stores.count
     self.stores[store_index]
   end
+
+  def each
+    EachStore.new(stores)
+  end
 end
 
 require 'roulette/transaction'
+require 'roulette/each_store'

@@ -21,7 +21,7 @@ describe Roulette::EachStore do
       it "sends any method to all stores" do
         fired_method = :sadd
         @stores.each do |store|
-          store.should_receive(fired_method).with(@args)
+          store.should_receive(fired_method).with(*@args)
         end
         Roulette::EachStore.new(@stores).send fired_method, *@args
       end
